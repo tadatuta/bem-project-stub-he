@@ -4,7 +4,14 @@ node_modules/
 .idea
 .project
 .svn
+npm-debug.log
+
+# bem
 .bem/cache/
-*.bundles/*/*.*
-!*.bundles/*/*.html
-!*.bundles/.bem/*
+.enb/tmp/
+*bundles*/*/*.*
+*bundles*/*/*.html
+!*bundles*/.bem/*
+*pages*/*/*.*
+!*pages*/*/*.html
+!*pages*/.bem/*

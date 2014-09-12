@@ -19,9 +19,11 @@ exports.techMixin = {
             "    head: [",
             "        { elem: 'css', url: '_{{bemBlockName}}.css' }",
             "    ],",
+            "    scripts: [",
+            "        { elem: 'js', url: '_{{bemBlockName}}.js' }",
+            "    ],",
             "    content: [",
-            "        'block content',",
-            "        { elem: 'js', url:'_{{bemBlockName}}.js' }",
+            "        'block content'",
             "    ]",
             "})"], vars);
     },

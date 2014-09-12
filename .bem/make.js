@@ -1,28 +1,22 @@
-/* jshint node:true */
-/* global MAKE */
+/* global MAKE:false */
 
-var environ = require('bem-environ')(__dirname);
-environ.extendMake(MAKE);
+// process.env.YENV = 'production';
 
-//process.env.YENV = 'production';
-//process.env.XJST_ASYNCIFY = 'yes';
+var PATH = require('path');
+
+require('bem-tools-autoprefixer').extendMake(MAKE);
 
 MAKE.decl('Arch', {
 
-    blocksLevelsRegexp: /^.+?\.blocks/,
-    bundlesLevelsRegexp: /^.+?\.bundles$/,
-
-    libraries: [
-        'bem-core @ f4b46ef0590549042d938f7e981df4d14eb4caef',
-        'bem-components @ 82301a8af6c15c2849d1f755a24f594de6522251'
-    ]
+    blocksLevelsRegexp : /^.+?\.blocks/,
+    bundlesLevelsRegexp : /^.+?\.bundles$/
 
 });
 
 
 MAKE.decl('BundleNode', {
 
-    getTechs: function() {
+    getTechs : function() {
 
         return [
             'html',
@@ -30,14 +24,13 @@ MAKE.decl('BundleNode', {
             'bemdecl.js',
             'deps.js',
             'browser.js+bemhtml',
-            'css',
-            'ie.css'
+            'stylus',
+            'css'
         ];
 
     },
 
     'create-bemjson.js-node': function(tech, bundleNode, magicNode) {
-
         return this.setBemCreateNode(
             tech,
             this.level.resolveTech(tech),
@@ -45,10 +38,52 @@ MAKE.decl('BundleNode', {
             magicNode);
     },
 
-    'create-browser.js+bemhtml-optimizer-node': function(tech, sourceNode, bundleNode) {
-        sourceNode.getFiles().forEach(function(f) {
-            this['create-js-optimizer-node'](tech, this.ctx.arch.getNode(f), bundleNode);
-        }, this);
+    getForkedTechs : function() {
+        return this.__base().concat(['browser.js+bemhtml', 'stylus']);
+    },
+
+    getLevelsMap : function() {
+        return {
+            desktop : [
+                'libs/bem-core/common.blocks',
+                'libs/bem-core/desktop.blocks',
+                'libs/bem-components/common.blocks',
+                'libs/bem-components/desktop.blocks',
+                'libs/bem-components/design/common.blocks',
+                'libs/bem-components/design/desktop.blocks',
+                'common.blocks',
+                'desktop.blocks'
+            ]
+        };
+    },
+
+     getLevels : function() {
+        var resolve = PATH.resolve.bind(PATH, this.root),
+            buildLevel = this.getLevelPath().split('.')[0],
+            levels = this.getLevelsMap()[buildLevel] || [];
+
+        return levels
+            .map(function(path) { return resolve(path); })
+            .concat(resolve(PATH.dirname(this.getNodePrefix()), 'blocks'));
+    },
+
+    'create-css-node' : function(tech, bundleNode, magicNode) {
+        var source = this.getBundlePath('stylus');
+        if(this.ctx.arch.hasNode(source)) {
+            return this.createAutoprefixerNode(tech, this.ctx.arch.getNode(source), bundleNode, magicNode);
+        }
+    }
+
+});
+
+MAKE.decl('AutoprefixerNode', {
+
+    getBrowsers : function() {
+        return [
+            'last 2 versions',
+            'ie 10',
+            'opera 12.16'
+        ];
     }
 
 });
