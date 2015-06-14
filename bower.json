@@ -9,6 +9,6 @@
     "libs"
   ],
   "dependencies": {
-    "bem-components": "822cfdbf005db0237ad09ff5c8e10de37ca4e917"
+    "bem-components": "2.2.1"
   }
 }
