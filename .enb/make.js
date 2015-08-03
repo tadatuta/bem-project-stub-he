@@ -51,7 +51,7 @@ module.exports = function(config) {
             [techs.cssAutoprefixer, {
                 sourceTarget: '?.noprefix.css',
                 destTarget: '?.css',
-                browserSupport: ['last 2 versions', 'ie 10', 'opera 12.16']
+                browserSupport: ['last 2 versions', 'ie 10', 'opera 12.1']
             }],
 
             // bemtree
@@ -90,10 +90,10 @@ module.exports = function(config) {
             [techs.prependYm, { source: '?.pre.js' }],
 
             // borschik
-            [techs.borschik, { sourceTarget: '?.js', destTarget: '_?.js', freeze: true, minify: isProd }],
-            [techs.borschik, { sourceTarget: '?.css', destTarget: '_?.css', tech: 'cleancss', freeze: true, minify: isProd }]
+            [techs.borschik, { sourceTarget: '?.js', destTarget: '?.min.js', freeze: true, minify: isProd }],
+            [techs.borschik, { sourceTarget: '?.css', destTarget: '?.min.css', tech: 'cleancss', freeze: true, minify: isProd }]
         ]);
 
-        nodeConfig.addTargets([/* '?.bemtree.js' */ '_?.css', '_?.js']);
+        nodeConfig.addTargets([/* '?.bemtree.js' */ '?.min.css', '?.min.js']);
     });
 };

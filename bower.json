@@ -1,8 +1,8 @@
 {
-  "name": "bem-project-stub",
+  "name": "bem-project-stub-he",
   "version": "1.0.0",
-  "description": "BEM project stub",
-  "bugs": "https://github.com/bem/project-stub/issues",
+  "description": "BEM project stub HTML edition",
+  "bugs": "https://github.com/tadatuta/bem-project-stub-he/issues",
   "ignore": [
     ".bem/cache",
     "node_modules",
