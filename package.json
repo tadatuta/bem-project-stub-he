@@ -31,7 +31,7 @@
     "enb-html-to-bemjson": "^0.1.0",
     "enb-modules": "^0.2.0",
     "enb-stylus": "^1.2.3",
-    "html2bemjson": "^1.4.0",
+    "html2bemjson": "^1.6.1",
     "stylus": "^0.52.0",
     "ym": "^0.1.0"
   },
