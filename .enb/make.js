@@ -8,18 +8,17 @@ var techs = {
         borschik: require('enb-borschik/techs/borschik'),
 
         // css
-        cssStylus: require('enb-stylus/techs/css-stylus'),
-        cssAutoprefixer: require('enb-autoprefixer/techs/css-autoprefixer'),
+        stylus: require('enb-stylus/techs/stylus'),
 
         // js
         browserJs: require('enb-diverse-js/techs/browser-js'),
         prependYm: require('enb-modules/techs/prepend-modules'),
 
         // bemtree
-        // bemtree: require('enb-bemxjst/techs/bemtree-old'),
+        // bemtree: require('enb-bemxjst/techs/bemtree'),
 
         // bemhtml
-        bemhtml: require('enb-bemxjst/techs/bemhtml-old')
+        bemhtml: require('enb-bemxjst/techs/bemhtml')
     },
     enbBemTechs = require('enb-bem-techs'),
     levels = [
@@ -47,11 +46,11 @@ module.exports = function(config) {
             [enbBemTechs.files],
 
             // css
-            [techs.cssStylus, { target: '?.noprefix.css' }],
-            [techs.cssAutoprefixer, {
-                sourceTarget: '?.noprefix.css',
-                destTarget: '?.css',
-                browserSupport: ['last 2 versions', 'ie 10', 'opera 12.1']
+            [techs.stylus, {
+                target: '?.css',
+                autoprefixer: {
+                    browsers: ['ie >= 10', 'last 2 versions', 'opera 12.1', '> 2%']
+                }
             }],
 
             // bemtree
