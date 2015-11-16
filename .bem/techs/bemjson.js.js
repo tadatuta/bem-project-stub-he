@@ -1,8 +1,8 @@
 'use strict';
 
-var FS = require('fs'),
-    BEM = require('bem'),
-    PATH = BEM.require('path'),
+var fs = require('fs'),
+    bem = require('bem'),
+    PATH = bem.require('path'),
     Template = require('bem/lib/template'),
     html2bemjson = require('html2bemjson'),
     bemUtil = require('bem/lib/util');
@@ -17,10 +17,10 @@ exports.techMixin = {
             "    block: 'page',",
             "    title: '{{bemBlockName}}',",
             "    head: [",
-            "        { elem: 'css', url: '_{{bemBlockName}}.css' }",
+            "        { elem: 'css', url: '{{bemBlockName}}.min.css' }",
             "    ],",
             "    scripts: [",
-            "        { elem: 'js', url: '_{{bemBlockName}}.js' }",
+            "        { elem: 'js', url: '{{bemBlockName}}.min.js' }",
             "    ],",
             "    content: [",
             "        'block content'",
@@ -32,7 +32,7 @@ exports.techMixin = {
         var basename = this.getPath(PATH.basename(path, '.' + suffix),
                                     'html'),
             htmlPath = PATH.join(PATH.dirname(path), basename),
-            html = bemUtil.isFile(htmlPath) ? FS.readFileSync(htmlPath, 'utf-8') : false,
+            html = bemUtil.isFile(htmlPath) ? fs.readFileSync(htmlPath, 'utf-8') : false,
             json;
 
         if (!html) return this.getTemplate(path, suffix, vars);
