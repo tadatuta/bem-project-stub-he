@@ -10,7 +10,7 @@
     "url": "https://github.com/tadatuta/bem-project-stub-he/issues"
   },
   "engines": {
-    "node": ">=0.10"
+    "node": ">= 4"
   },
   "dependencies": {
     "bower": "^1.6.5"
