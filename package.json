@@ -13,7 +13,7 @@
     "node": ">=0.10"
   },
   "dependencies": {
-    "bower": "^1.6.5"
+    "bower": "^1.8.0"
   },
   "devDependencies": {
     "bem": "^0.10.2",
