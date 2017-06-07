@@ -26,7 +26,7 @@ var techs = {
         browserJs: require('enb-js/techs/browser-js'),
 
         // bemtree
-        // bemtree: require('enb-bemxjst/techs/bemtree'),
+        bemtree: require('enb-bemxjst/techs/bemtree'),
 
         // bemhtml
         bemhtml: require('enb-bemxjst/techs/bemhtml'),
@@ -65,7 +65,7 @@ module.exports = function(config) {
             }],
 
             // bemtree
-            // [techs.bemtree, { sourceSuffixes: ['bemtree', 'bemtree.js'] }],
+            [techs.bemtree, { sourceSuffixes: ['bemtree', 'bemtree.js'] }],
 
             // bemhtml
             [techs.bemhtml, {
@@ -78,32 +78,32 @@ module.exports = function(config) {
             // [techs.bemjsonToHtml],
 
             // client bemhtml
-            [enbBemTechs.depsByTechToBemdecl, {
-                target: '?.bemhtml.bemdecl.js',
-                sourceTech: 'js',
-                destTech: 'bemhtml'
-            }],
-            [enbBemTechs.deps, {
-                target: '?.bemhtml.deps.js',
-                bemdeclFile: '?.bemhtml.bemdecl.js'
-            }],
-            [enbBemTechs.files, {
-                depsFile: '?.bemhtml.deps.js',
-                filesTarget: '?.bemhtml.files',
-                dirsTarget: '?.bemhtml.dirs'
-            }],
-            [techs.bemhtml, {
-                target: '?.browser.bemhtml.js',
-                filesTarget: '?.bemhtml.files',
-                sourceSuffixes: ['bemhtml', 'bemhtml.js'],
-                engineOptions : { elemJsInstances : true }
-            }],
+            // [enbBemTechs.depsByTechToBemdecl, {
+            //     target: '?.bemhtml.bemdecl.js',
+            //     sourceTech: 'js',
+            //     destTech: 'bemhtml'
+            // }],
+            // [enbBemTechs.deps, {
+            //     target: '?.bemhtml.deps.js',
+            //     bemdeclFile: '?.bemhtml.bemdecl.js'
+            // }],
+            // [enbBemTechs.files, {
+            //     depsFile: '?.bemhtml.deps.js',
+            //     filesTarget: '?.bemhtml.files',
+            //     dirsTarget: '?.bemhtml.dirs'
+            // }],
+            // [techs.bemhtml, {
+            //     target: '?.browser.bemhtml.js',
+            //     filesTarget: '?.bemhtml.files',
+            //     sourceSuffixes: ['bemhtml', 'bemhtml.js'],
+            //     engineOptions : { elemJsInstances : true }
+            // }],
 
             // js
             [techs.browserJs, { includeYM: true }],
             [techs.fileMerge, {
                 target: '?.js',
-                sources: ['?.browser.js', '?.browser.bemhtml.js']
+                sources: ['?.browser.js', '?.bemtree.js', '?.bemhtml.js']
             }],
 
             // borschik
@@ -111,6 +111,6 @@ module.exports = function(config) {
             [techs.borschik, { source: '?.css', target: '?.min.css', minify: isProd }]
         ]);
 
-        nodeConfig.addTargets([/* '?.bemtree.js', */ '?.min.css', '?.min.js']);
+        nodeConfig.addTargets(['?.bemtree.js', '?.min.css', '?.min.js']);
     });
 };

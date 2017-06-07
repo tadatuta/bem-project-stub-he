@@ -1,0 +1,2 @@
+browser  ->  Балансер   -> node.js     ->  [API1, API2]
+<- html  <-  bemhtml    <-  bemjson    <-  bemtree    <- data
